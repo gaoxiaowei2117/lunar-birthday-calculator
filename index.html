@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="每隔19年核对农历与阳历生日是否同一天，可离线使用并导出 CSV。">
+  <title>农历 · 阳历生日重合计算器</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <script defer src="src/calendar.js"></script>
+  <script defer src="src/csv.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="eyebrow">两种历法，一个生日</span>
+      <h1>农历 · 阳历<br>生日重合计算器</h1>
+      <p class="intro">每隔 19 年，看看你的两个生日是不是同一天。</p>
+      <span class="pill">本地计算 · 可离线使用</span>
+    </header>
+    <section class="card" aria-labelledby="input-heading">
+      <h2 id="input-heading">从你的出生日期开始</h2>
+      <form id="birthday-form">
+        <div class="fields">
+          <label>阳历出生日期<input id="birth-date" type="date" value="1988-09-18" min="1900-01-01" max="2200-12-31" required aria-describedby="range-help"></label>
+          <label>计算到多少岁<input id="max-age" type="number" value="120" min="0" max="120" step="1" required></label>
+          <button id="calculate" type="submit">开始计算 <span aria-hidden="true">↗</span></button>
+        </div>
+        <p id="range-help" class="hint">范围：1900-01-01～2200-12-31。年龄可选 0～120 岁；检查 19、38、57、76、95、114 岁；超过 2200 年的部分会明确截断。</p>
+      </form>
+      <p id="engine-status" class="hint" role="status"></p>
+      <p id="error" class="error" role="alert" hidden></p>
+      <p id="progress" role="status" aria-live="polite"></p>
+    </section>
+    <aside class="notice">
+      <strong>计算结果需要怎样理解？</strong>
+      <p>采用浏览器中国农历，按北京时间（UTC+8）计算。19 年是近似周期，不保证重合。只匹配同名、同日且闰月标记相同的农历生日。</p>
+      <p>部分远期日期可能相差一天。验证时发现 2057-09-28～2057-10-27 的浏览器结果与香港天文台表不同；1900 年及 2101～2200 年尚未做权威对照，不能保证这些日期准确。<a href="docs/accuracy.md">查看验证报告</a></p>
+    </aside>
+    <section id="results" hidden aria-labelledby="results-heading">
+      <div class="section-title"><h2 id="results-heading">每隔 19 年的结果</h2><span id="span-label" class="hint"></span></div>
+      <div class="summary-grid">
+        <div class="card"><span class="eyebrow">出生农历</span><strong id="birth-lunar"></strong><span id="birth-solar" class="hint"></span></div>
+        <div class="card"><span class="eyebrow">同一天</span><strong id="match-count"></strong><span class="hint">仅统计每隔 19 年的检查点</span></div>
+        <div class="card"><span class="eyebrow">不是同一天</span><strong id="non-match-count"></strong><span class="hint">无法比较的年份单独标明</span></div>
+      </div>
+      <p id="truncated" class="notice" hidden></p>
+      <p id="unverified-range" class="notice" hidden>结果包含 2101～2200 年的日期。这部分采用浏览器农历推算，尚未做权威历法对照验证，请将其视为参考结果。</p>
+      <div class="card match-card"><h3>同一天的年份</h3><div id="match-years" class="chips"></div></div>
+      <div class="card match-card"><h3>不是同一天的年份</h3><div id="non-match-years" class="chips"></div></div>
+      <div class="card table-card">
+        <div class="toolbar">
+          <label class="checkbox"><input id="matches-only" type="checkbox"> 只看同一天</label>
+          <span id="row-count" class="hint"></span>
+          <button id="export-csv" class="secondary" type="button" disabled>导出当前表格 CSV</button>
+        </div>
+        <div class="table-scroll" tabindex="0" aria-label="生日对照表，可横向滚动">
+          <table>
+            <caption class="sr-only">每隔19年的生日核对结果</caption>
+            <thead><tr><th scope="col">年龄 / 年份</th><th scope="col">阳历生日</th><th scope="col">阳历生日对应农历</th><th scope="col">是否同一天 / 说明</th></tr></thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+        <p id="empty" class="hint" hidden>当前范围或筛选没有可显示的 19 年检查点。</p>
+        <p class="hint footnote">从出生年起每隔 19 年检查一次，不计出生年。每次都实际转换当年的阳历生日，核对农历月、日和闰月标记；年龄为年份差。</p>
+      </div>
+    </section>
+    <details class="card rules">
+      <summary>特殊生日与计算规则</summary>
+      <p>2 月 29 日：非闰年不自动改成 2 月 28 日或 3 月 1 日，标为“无法比较”。</p>
+      <p>闰月出生：只在相同闰月出现时匹配，不自动改到普通月。普通月出生不额外匹配闰月。</p>
+      <p>农历三十：遇到只有二十九天的月份，不自动改成二十九。只核对该年阳历生日当天的农历日期。</p>
+      <p>页面与 CSV 均不上传生日。无需安装 Python、Node.js 或联网；开发测试才需要 Node.js。</p>
+    </details>
+    <footer>让日期说话，而不是让周期替你猜。<br><a href="README.md">项目说明</a> · <a href="docs/accuracy.md">日期范围与准确性</a></footer>
+    <noscript><p class="error">请启用 JavaScript 才能使用计算器。</p></noscript>
+  </main>
+</body>
+</html>

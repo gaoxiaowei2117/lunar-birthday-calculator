@@ -1,0 +1,14 @@
+{
+  "name": "lunar-birthday-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline browser lunar/solar birthday coincidence calculator",
+  "scripts": {
+    "dev": "node scripts/serve.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "check": "node --check src/calendar.js && node --check src/csv.js && node --check src/app.js",
+    "build": "node scripts/build.cjs",
+    "fixtures": "node scripts/import-hko-fixtures.cjs"
+  },
+  "engines": { "node": ">=22" }
+}
