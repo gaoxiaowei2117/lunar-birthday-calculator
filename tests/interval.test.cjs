@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const calendar = require('../src/calendar.js');
 
-test('只检查19年倍数，默认生日的已核对年份正确分类', () => {
+test('只检查19年倍数，1988年生日示例的已核对年份正确分类', () => {
   const result = calendar.analyzeEvery19Years('1988-09-18', 120);
   assert.deepEqual(result.rows.map(row => row.age), [19,38,57,76,95,114]);
   assert.deepEqual(result.rows.filter(row => row.match).map(row => row.year), [2007,2026,2045,2064]);

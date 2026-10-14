@@ -36,7 +36,7 @@ test('输入、世纪闰年与日期边界', () => {
   for (const age of [-1,121,1.5,NaN]) assert.throws(() => calendar.analyze('1988-09-18', age));
 });
 
-test('默认生日：十九年间隔并非永远重合', () => {
+test('1988年生日示例：十九年间隔并非永远重合', () => {
   const result = calendar.analyze('1988-09-18', 100);
   assert.equal(result.rows.length, 101);
   assert.deepEqual(result.birthLunar, {year:1988,month:8,day:8,isLeap:false});
