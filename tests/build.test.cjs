@@ -9,7 +9,7 @@ const root = path.resolve(__dirname, '..');
 
 test('源码页面所有运行资源都在工程内，不依赖在线加载', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const refs = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(m => m[1]);
+  const refs = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(m => m[1].split("?")[0]);
   for (const ref of refs) {
     assert.ok(!/^(?:https?:|\/\/|\/)/.test(ref), ref);
     assert.ok(fs.existsSync(path.join(root, ref)), ref);

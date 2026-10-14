@@ -6,9 +6,7 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const escape = text => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let html = read('index.html');
 html = html.replace('<link rel="stylesheet" href="src/styles.css">', () => `<style>\n${read('src/styles.css')}\n</style>`);
-for (const file of ['calendar.js', 'csv.js', 'app.js']) {
-  html = html.replace(`<script defer src="src/${file}"></script>`, '');
-}
+html = html.replace(/<script defer src="src\/(?:calendar|csv|app)\.js(?:\?[^"<>]*)?"><\/script>/g, '');
 const scripts = ['calendar.js', 'csv.js', 'app.js'].map(file =>
   `<script>\n${read('src/' + file).replace(/<\/script/gi, '<\\/script')}\n</script>`).join('\n');
 html = html.replace('</body>', () => `${scripts}\n</body>`);
