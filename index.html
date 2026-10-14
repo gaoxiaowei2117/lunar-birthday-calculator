@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="src/styles.css">
   <script defer src="src/calendar.js?v=20261014-2"></script>
   <script defer src="src/csv.js"></script>
-  <script defer src="src/app.js?v=20261014-2"></script>
+  <script defer src="src/app.js?v=20261014-3"></script>
 </head>
 <body>
   <main>
@@ -57,7 +57,7 @@
         <div class="table-scroll" tabindex="0" aria-label="生日对照表，可横向滚动">
           <table>
             <caption class="sr-only">每隔19年的生日核对结果</caption>
-            <thead><tr><th scope="col">年龄 / 年份</th><th scope="col">阳历生日</th><th scope="col">阳历生日对应农历</th><th scope="col">是否同一天 / 说明</th></tr></thead>
+            <thead><tr><th scope="col">年龄 / 年份</th><th scope="col">阳历生日</th><th scope="col">阳历生日对应农历</th><th scope="col">是否同一天</th></tr></thead>
             <tbody id="table-body"></tbody>
           </table>
         </div>
@@ -66,10 +66,11 @@
       </div>
     </section>
     <details class="card rules">
-      <summary>特殊生日与计算规则</summary>
+      <summary>计算规则与准确性说明</summary>
       <p>2 月 29 日：非闰年不自动改成 2 月 28 日或 3 月 1 日，标为“无法比较”。</p>
       <p>闰月出生：只在相同闰月出现时匹配，不自动改到普通月。普通月出生不额外匹配闰月。</p>
       <p>农历三十：遇到只有二十九天的月份，不自动改成二十九。只核对该年阳历生日当天的农历日期。</p>
+      <p>2102 年 9 月 18 日已通过浏览器与寿星天文历交叉核对，结果均为八月初七；这不等于官方历表认证，也不代表其他远期日期已经验证。其他日期的范围限制和已知差异见<a href="docs/accuracy.md">验证报告</a>。</p>
       <p>页面与 CSV 均不上传生日。无需安装 Python、Node.js 或联网；开发测试才需要 Node.js。</p>
     </details>
     <footer>让日期说话，而不是让周期替你猜。<br><a href="README.md">项目说明</a> · <a href="docs/accuracy.md">日期范围与准确性</a></footer>

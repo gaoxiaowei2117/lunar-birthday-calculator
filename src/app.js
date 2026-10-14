@@ -16,9 +16,8 @@
     for (const row of rows) {
       const tr = document.createElement('tr');
       if (row.match) tr.className = 'matched';
-      const status = [row.status, ...row.notes].join('；');
       const values = [`${row.age} 岁 / ${row.year}`, row.solarBirthday || '本年无此日期',
-        calendar.formatLunar(row.solarLunar), status];
+        calendar.formatLunar(row.solarLunar), row.status];
       for (const value of values) {
         const td = document.createElement('td');
         td.textContent = value;
