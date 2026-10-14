@@ -156,6 +156,9 @@
       if ([2057, 2089, 2097].includes(year)) notes.push('远期朔日需复核');
       if (state.birthYear === 1900) notes.push('出生日期未对照天文台表验证');
       if (year > 2100) notes.push('2101～2200 年未做权威对照验证');
+      if (solarBirthday === '2102-09-18' && solarLunar.month === 8 && solarLunar.day === 7 && !solarLunar.isLeap) {
+        notes.push('此日期已通过浏览器与寿星天文历交叉核对');
+      }
       state.rows.push({year, age, solarBirthday, solarLunar, match,
         status: !solar ? '无法比较' : match ? '同一天' : '不是同一天', notes});
     }

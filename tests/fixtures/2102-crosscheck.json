@@ -1,0 +1,115 @@
+{
+  "library": "sxtwl",
+  "version": "2.0.7",
+  "checkedOn": "2026-10-14",
+  "method": "Independent astronomical calendar algorithm; not an official almanac certification",
+  "dates": [
+    {
+      "date": "1988-09-18",
+      "lunar": {
+        "year": 1988,
+        "month": 8,
+        "day": 8,
+        "isLeap": false
+      },
+      "intl": {
+        "year": 1988,
+        "month": 8,
+        "day": 8,
+        "isLeap": false
+      },
+      "agrees": true
+    },
+    {
+      "date": "2064-09-18",
+      "lunar": {
+        "year": 2064,
+        "month": 8,
+        "day": 8,
+        "isLeap": false
+      },
+      "intl": {
+        "year": 2064,
+        "month": 8,
+        "day": 8,
+        "isLeap": false
+      },
+      "agrees": true
+    },
+    {
+      "date": "2083-09-18",
+      "lunar": {
+        "year": 2083,
+        "month": 8,
+        "day": 7,
+        "isLeap": false
+      },
+      "intl": {
+        "year": 2083,
+        "month": 8,
+        "day": 7,
+        "isLeap": false
+      },
+      "agrees": true
+    },
+    {
+      "date": "2102-09-12",
+      "lunar": {
+        "year": 2102,
+        "month": 8,
+        "day": 1,
+        "isLeap": false
+      },
+      "intl": {
+        "year": 2102,
+        "month": 8,
+        "day": 1,
+        "isLeap": false
+      },
+      "agrees": true
+    },
+    {
+      "date": "2102-09-18",
+      "lunar": {
+        "year": 2102,
+        "month": 8,
+        "day": 7,
+        "isLeap": false
+      },
+      "intl": {
+        "year": 2102,
+        "month": 8,
+        "day": 7,
+        "isLeap": false
+      },
+      "agrees": true
+    },
+    {
+      "date": "2102-09-19",
+      "lunar": {
+        "year": 2102,
+        "month": 8,
+        "day": 8,
+        "isLeap": false
+      },
+      "intl": {
+        "year": 2102,
+        "month": 8,
+        "day": 8,
+        "isLeap": false
+      },
+      "agrees": true
+    }
+  ],
+  "lunarBirthday2102": "2102-09-19",
+  "sources": [
+    "https://github.com/yuangu/sxtwl_cpp/blob/master/python/README.md",
+    "https://pypi.org/project/sxtwl/2.0.7/"
+  ],
+  "comparisonEngine": {
+    "name": "Intl Chinese calendar",
+    "node": "v22.23.2",
+    "icu": "78.3"
+  },
+  "conclusion": "两套实现均计算 2102-09-18 为普通八月初七，2102-09-19 为普通八月初八；此日期已交叉核对，未经官方历表认证，不代表2101～2200年全部已验证。"
+}

@@ -26,3 +26,13 @@ test('2月29日的缺失年份是无法比较，不被归入不是同一天', ()
   assert.deepEqual(result.rows.map(row => row.status), ['无法比较','无法比较','无法比较', '同一天']);
   assert.equal(result.rows[0].solarBirthday, null);
 });
+
+
+test('2102具体日期的独立核对记录一致，不把单日核对推广到全年', () => {
+  const evidence = require('./fixtures/2102-crosscheck.json');
+  for (const row of evidence.dates) assert.deepEqual(calendar.solarToLunar(row.date), row.lunar);
+  const verified = calendar.analyzeEvery19Years('1988-09-18', 120).rows.at(-1);
+  assert.ok(verified.notes.some(note => note.includes('交叉核对')));
+  const other = calendar.analyzeEvery19Years('1988-10-10', 120).rows.at(-1);
+  assert.ok(!other.notes.some(note => note.includes('交叉核对')));
+});

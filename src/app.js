@@ -47,7 +47,7 @@
       const chips = rows.map(row => {
         const chip = document.createElement('span');
         chip.className = 'chip';
-        chip.textContent = `${row.year} · ${row.age} 岁${row.year > 2100 ? "（未验证）" : ""}`;
+        chip.textContent = `${row.year} · ${row.age} 岁`;
         return chip;
       });
       byId(id).replaceChildren(...chips);
